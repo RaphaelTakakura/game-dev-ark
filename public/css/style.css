@@ -106,31 +106,6 @@ button {
     align-items: center;
 }
 
-.cadastro_interesses_individual {
-
-    display: flex;
-    width: 80%;
-    padding: 20px;
-    align-items: center;
-    justify-content: space-between;
-    border-style: solid;
-    border-width: 2px;
-    margin: 10px;
-}
-
-.cadastro_interesses_individual label{
-
-    font-size: 20px;
-}
-
-.cadastro_interesses_individual input{
-    
-    display: flex;
-    width: 20px;
-    justify-content: flex-end;
-    align-self: flex-end;
-}
-
 .classe_padronizacao {
 
     display: flex;

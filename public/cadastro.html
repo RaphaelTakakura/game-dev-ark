@@ -59,26 +59,6 @@
 
         </div>
     
-        <div class="cadastro_interesses">
-            
-            <h2> Interesses Principais: </h2>
-
-            <div class="cadastro_interesses_individual" style="background-color: rgb(0, 191, 197);">
-
-                <label for="cb_tecnologia"> Tecnologia </label>
-                <input type="checkbox" id="cb_tecnologia" value="1">
-
-            </div>
-            
-            <div class="cadastro_interesses_individual" style="background-color: rgb(97, 0, 153);">
-
-                <label for="cb_design"> Game Design </label>
-                <input type="checkbox" id="cb_design" value="1">
-
-            </div>         
-
-        </div>
-    
     </div>
 
     <div class="footer">
@@ -98,8 +78,6 @@
         let usuario = inp_usuario.value
         let email = inp_email.value
         let senha = inp_senha.value
-        let tecnologia = cb_tecnologia.value
-        let design = cb_design.value
 
         let email_valido = email.includes('@') && email.includes('.') && email.indexOf('@') != email.indexOf('.') - 1
 
@@ -146,8 +124,6 @@
                 usuario,
                 email,
                 senha,
-                tecnologia,
-                design
                 }),
             })
                 .then(function (resposta) {
