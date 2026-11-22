@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
 
+    <script src="js/script_geral.js"></script>
+
 </head>
 
 <body>
@@ -29,7 +31,7 @@
             <li>
                 <span style="color: rgb(230, 2, 127); font-weight: bold; cursor: default;"> Cadastro </span>
             </li>
-            <li>
+            <li id="login_perfil">
                 <a href="login.html"> Login </a>
             </li>
         </ul>
@@ -158,6 +160,15 @@
                 senha_valida = true
             }
         }   
+    }
+
+    if (!sessionStorage.USER_USUARIO) {
+        login_perfil.innerHTML = `<a href="login.html"> Login </a>`;
+    }
+
+    else {
+
+        login_perfil.innerHTML = `<a href="dashboard/dashboard.html"> Perfil </a>`;
     }
 
 </script>

@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
 
+    <script src="js/script_geral.js"></script>
+
 </head>
 
 <body>
@@ -102,6 +104,8 @@
                     sessionStorage.USER_USUARIO = json.usuario;
                     sessionStorage.ID_USUARIO = json.id;
 
+                    console.log("Sessão:", sessionStorage.ID_USUARIO, sessionStorage.USER_USUARIO);
+
                     window.location = "./dashboard/dashboard.html";
                 });
 
@@ -116,6 +120,15 @@
         })
 
         return false;
+    }
+
+    if (!sessionStorage.USER_USUARIO) {
+        login_perfil.innerHTML = `<a href="login.html"> Login </a>`;
+    }
+
+    else {
+
+        login_perfil.innerHTML = `<a href="dashboard/dashboard.html"> Perfil </a>`;
     }
 
 </script>

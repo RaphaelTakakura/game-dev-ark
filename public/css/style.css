@@ -347,6 +347,19 @@ button {
     border-style:double;
 }
 
+.card_comentario {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px;
+    padding: 20px;
+    background-color: rgb(230, 2, 127);
+    color: white;
+    border-radius: 20px;
+    border-style:ridge;
+}
+
 .dashboard_kpi span {
 
     text-align: center;

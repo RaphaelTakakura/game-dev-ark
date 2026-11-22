@@ -11,9 +11,11 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
 
+    <script src="js/script_comentarios.js" defer></script>
+
 </head>
 
-<body>
+<body data-artigo-id="1">
 
     <div class="header">
 
@@ -29,7 +31,7 @@
             <li>
                 <a href="cadastro.html"> Cadastro </a>
             </li>
-            <li>
+            <li id="login_perfil">
                 <a href="login.html"> Login </a>
             </li>
         </ul>
@@ -77,7 +79,7 @@
                     
             <span style="font-size: 30px; padding: 10px; color: rgb(8, 0, 80);"> < <span style="color:white"> Publicar Comentário </span> > </span>
                 
-                <form id="form_comentario" method="post" onsubmit="return publicar()">
+                <form id="form_comentario" onsubmit="return publicarComentario(event)">
 
                         <label> Título: </label>
                         <br>
@@ -92,6 +94,10 @@
                     </form>
             </div>
 
+            <div id="feedback_comentario" class="texto_erro"></div>
+            
+            <div id="feed_comentarios" class="card_comentario"></div>  
+            
         </div>
 
         </div>
@@ -105,4 +111,15 @@
     
 </body>
 
-</html>
+<script>
+
+    if (!sessionStorage.USER_USUARIO) {
+        login_perfil.innerHTML = `<a href="login.html"> Login </a>`;
+    }
+
+    else {
+
+        login_perfil.innerHTML = `<a href="dashboard/dashboard.html"> Perfil </a>`;
+    }
+
+</script>

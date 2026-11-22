@@ -18,12 +18,14 @@ function autenticar(req, res) {
 
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
- 
+    
                         res.json({
                             id: resultadoAutenticar[0].id,
                             email: resultadoAutenticar[0].email,
                             usuario: resultadoAutenticar[0].usuario
                         })
+
+                        return res.status(200).json(resultadoAutenticar[0]);
 
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Usuário e/ou senha inválido(s)");
