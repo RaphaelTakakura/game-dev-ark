@@ -7,14 +7,37 @@ body {
     padding: 0;
 }
 
+a {
+
+    color: white;
+    text-decoration: none;
+}
+
 p {
     margin: 20px;
+    background-color: rgb(8, 0, 80);
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    corner-shape: bevel;
+    font-size: 20px;
 }
 
 form {
 
     width: 100%;
     justify-content: center;
+}
+
+.logo {
+
+    font-size: 30px; 
+    padding: 10px; 
+    color: rgb(230, 2, 127); 
+    font-weight: bold; 
+    cursor: default;
 }
 
 .formulario_login input {
@@ -133,7 +156,7 @@ button {
     justify-self: center;
     background-color: rgb(8, 0, 80);
     border-radius: 10px;
-    corner-shape: notch;
+    corner-shape: bevel;
 }
 
 .texto_erro {
@@ -149,11 +172,19 @@ button {
     font-size: 30px;
     padding: 20px;
     align-items: center;
+    text-decoration: none;
+    font-style: none;
+}
+
+.home_artigos_titulo:hover {
+
+    color: rgb(8, 0, 80);
 }
 
 .home_artigos_lista {
 
     display: flex;
+    background-color: rgb(230, 2, 127);
     width: 90%;
     height: fit-content;
     padding: 20px;
@@ -169,7 +200,7 @@ button {
     background-color: rgb(8, 0, 80);
     padding: 20px;
     border-radius: 10px;
-    corner-shape: notch;
+    corner-shape: bevel;
 } 
 
 .comentario_titulo {
@@ -178,7 +209,7 @@ button {
     background-color: rgb(230, 2, 127);
     padding: 20px;
     border-radius: 10px;
-    corner-shape: notch;
+    corner-shape: bevel;
 }
 
 .navbar {
@@ -270,4 +301,26 @@ button {
 .container_comentarios textarea {
 
     width: 80%;
+}
+
+.botao_arquivar {
+
+    background-color: rgb(230, 2, 127);
+    width: 300px;
+    height: 100px;
+    margin-top: 20px;
+    font-size: 30px;
+    color: rgb(8, 0, 80);
+    cursor: pointer;
+    border: 2px;
+    border-radius: 20px;
+    border-color: rgb(8, 0, 80);
+    border-style:ridge;
+}
+
+.botao_arquivar:hover {
+
+    background-color: rgb(8, 0, 80);
+    color: white;
+    border-color: rgb(230, 2, 127);
 }

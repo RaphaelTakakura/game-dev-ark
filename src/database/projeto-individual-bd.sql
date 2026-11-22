@@ -31,7 +31,7 @@ fk_usuario INT,
 FOREIGN KEY (fk_artigo) REFERENCES artigo(id),
 FOREIGN KEY (fk_usuario) REFERENCES usuario(id));
 
-CREATE TABLE interesse_do_usuario(
+CREATE TABLE artigo_arquivado(
 fk_usuario INT,
 fk_interesse INT,
 FOREIGN KEY (fk_usuario) REFERENCES usuario(id),
@@ -44,6 +44,9 @@ INSERT INTO interesse VALUES
 
 INSERT INTO artigo VALUES
 (DEFAULT, 'Introdução ao Aseprite', NOW(), 2);
+
+INSERT INTO artigo VALUES
+(DEFAULT, 'Clareza na Transmissão de Informações', NOW(), 1);
 
 SELECT * FROM interesse;
 SELECT * FROM artigo;
