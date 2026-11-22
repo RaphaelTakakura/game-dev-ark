@@ -149,8 +149,3 @@ function escapeHtml(texto) {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 }
-
-function Arquivar() {
-
-
-}

@@ -33,10 +33,10 @@ FOREIGN KEY (fk_usuario) REFERENCES usuario(id));
 
 CREATE TABLE artigo_arquivado(
 fk_usuario INT,
-fk_interesse INT,
+fk_artigo INT,
 FOREIGN KEY (fk_usuario) REFERENCES usuario(id),
-FOREIGN KEY (fk_interesse) REFERENCES interesse(id),
-PRIMARY KEY (fk_usuario, fk_interesse));
+FOREIGN KEY (fk_artigo) REFERENCES artigo(id),
+PRIMARY KEY (fk_usuario, fk_artigo));
 
 INSERT INTO interesse VALUES
 (DEFAULT, 'Game Design'),
