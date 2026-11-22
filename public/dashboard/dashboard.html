@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="../css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
@@ -28,10 +29,10 @@
                 <a href="../artigoMain.html"> Artigos </a>
             </li>
             <li>
-                <a href="../cadastro.html"> Cadastro </a>
-            </li>
-            <li>
                 <span style="color: rgb(230, 2, 127); font-weight: bold; cursor: default;"> Perfil </span>
+            </li>
+            <li id="login_deslogar">
+                <a href="../login.html" onclick="Sair()"> Sair </a>
             </li>
         </ul>
 
@@ -39,7 +40,7 @@
 
     <div class="classe_padronizacao">
 
-        <h1 class="artigo_titulo"> Estatísticas <span style="color: rgb(230, 2, 127);"> USUÁRIO </span></h1>
+        <h1 class="artigo_titulo"> Estatísticas <span style="color: rgb(230, 2, 127);" id="dash_usuario"> </span></h1>
 
         <div class="dashboard">
 
@@ -90,6 +91,9 @@
 
 <script>
 
+    let usuario = sessionStorage.USER_USUARIO
+    dash_usuario.innerHTML = `${usuario}`
+
     Chart.defaults.color = 'white';
     Chart.defaults.borderColor = 'white'
 
@@ -127,5 +131,10 @@
             }
         }
     )
+
+    function Sair() {
+
+        sessionStorage.clear()
+    }
 
 </script>

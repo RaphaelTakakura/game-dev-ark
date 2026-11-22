@@ -26,15 +26,6 @@ function listarPorArtigo(idArtigo) {
     return database.executar(instrucaoSql);
 }
 
-function editar(idComentario, titulo, conteudo) {
-    var instrucaoSql = `
-        UPDATE comentario
-        SET titulo = '${titulo}', conteudo = '${conteudo}'
-        WHERE id = ${idComentario};
-    `;
-    return database.executar(instrucaoSql);
-}
-
 function deletar(idComentario) {
     var instrucaoSql = `
         DELETE FROM comentario
@@ -46,6 +37,5 @@ function deletar(idComentario) {
 module.exports = {
     publicar,
     listarPorArtigo,
-    editar,
     deletar
 };

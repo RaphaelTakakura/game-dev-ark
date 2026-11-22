@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
 
-    <script src="js/script_geral.js"></script>
-
 </head>
 
 <body> 
@@ -28,10 +26,10 @@
             <li>    
                 <a href="artigoMain.html"> Artigos </a>
             </li>
-            <li>
+            <li id="login_perfil">
                 <a href="cadastro.html"> Cadastro </a>
             </li>
-            <li id="login_perfil">
+            <li id="login_deslogar">
                 <a href="login.html"> Login </a>
             </li>
         </ul>
@@ -100,12 +98,19 @@
 <script>
 
     if (!sessionStorage.USER_USUARIO) {
-        login_perfil.innerHTML = `<a href="login.html"> Login </a>`;
+        login_perfil.innerHTML = `<a href="cadastro.html"> Cadastro </a>`;
+        login_deslogar.innerHTML = `<a href="login.html"> Login </a>`
     }
 
     else {
 
         login_perfil.innerHTML = `<a href="dashboard/dashboard.html"> Perfil </a>`;
+        login_deslogar.innerHTML = `<a href="login.html" onclick="Sair()"> Sair </a>`
+    }
+
+    function Sair() {
+
+        sessionStorage.clear()
     }
 
 </script>

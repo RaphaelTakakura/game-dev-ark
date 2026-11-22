@@ -18,6 +18,7 @@ var app = express();
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var comentarioRouter = require("./src/routes/comentarios");
+var dashRouter = require("./src/routes/dashboard")
 //var avisosRouter = require("./src/routes/avisos");
 //var medidasRouter = require("./src/routes/medidas");
 //var aquariosRouter = require("./src/routes/aquarios");

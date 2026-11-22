@@ -52,6 +52,7 @@ SELECT * FROM interesse;
 SELECT * FROM artigo;
 SELECT * FROM usuario;
 SELECT * FROM comentario;
+SELECT * FROM artigo_arquivado;
 
 INSERT INTO comentario VALUES
 (1, 'Comentário Teste', NOW(), 'Esse comentário é um teste de conexão.', 1,1);

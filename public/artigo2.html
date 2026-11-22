@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
 
-    <script src="js/script_comentarios.js"></script>
+    <script src="js/script_comentarios.js" defer></script>
 
 </head>
 
@@ -28,10 +28,10 @@
             <li>    
                 <a href="artigoMain.html"> Artigos </a>
             </li>
-            <li>
+            <li id="login_perfil">
                 <a href="cadastro.html"> Cadastro </a>
             </li>
-            <li id="login_perfil">
+            <li id="login_deslogar">
                 <a href="login.html"> Login </a>
             </li>
         </ul>
@@ -151,9 +151,37 @@
 
         </p>
 
-        <button class="botao_arquivar"> Arquivar Artigo </button>
+        <button class="botao_arquivar" onclick="Arquivar()"> Arquivar Artigo </button>
 
     </div>
+
+    <div class="area_comentarios">
+
+            <div class="container_comentarios">
+                    
+            <span style="font-size: 30px; padding: 10px; color: rgb(8, 0, 80);"> < <span style="color:white"> Publicar Comentário </span> > </span>
+                
+                <form id="form_comentario" onsubmit="return publicarComentario(event)">
+
+                        <label> Título: </label>
+                        <br>
+                        <input name="titulo" id="titulo" maxlength="100" type="text">
+                        <br>
+                        <label> Conteúdo (máximo de 300 caracteres): </label>
+                        <br>
+                        <textarea name="descricao" id="textarea_descricao" maxlength="300" rows="5"></textarea>
+                        <br>
+                        <button>Enviar</button>
+
+                    </form>
+            </div>
+
+            <div id="feedback_comentario" class="texto_erro"></div>
+            
+            <div id="feed_comentarios" class="card_comentario"></div>  
+            
+        </div>
+
 
     <div class="footer">
         <span>Esse projeto utiliza códigos do <a href="https://github.com/BandTec/web-data-viz" class="classe_padronizacao_links"> web-data-viz </a></span>
@@ -166,12 +194,19 @@
 <script>
     
     if (!sessionStorage.USER_USUARIO) {
-        login_perfil.innerHTML = `<a href="login.html"> Login </a>`;
+        login_perfil.innerHTML = `<a href="cadastro.html"> Cadastro </a>`;
+        login_deslogar.innerHTML = `<a href="login.html"> Login </a>`
     }
 
     else {
 
         login_perfil.innerHTML = `<a href="dashboard/dashboard.html"> Perfil </a>`;
+        login_deslogar.innerHTML = `<a href="login.html" onclick="Sair()"> Sair </a>`
+    }
+
+    function Sair() {
+
+        sessionStorage.clear()
     }
 
 </script>

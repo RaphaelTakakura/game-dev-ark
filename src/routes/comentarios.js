@@ -11,10 +11,6 @@ router.get("/listar/:idArtigo", function (req, res) {
     comentarioController.listarPorArtigo(req, res);
 });
 
-router.put("/editar/:idComentario", function (req, res) {
-    comentarioController.editar(req, res);
-});
-
 router.delete("/deletar/:idComentario", function (req, res) {
     comentarioController.deletar(req, res);
 });

@@ -36,10 +36,6 @@ function publicarComentario(event) {
         return false;
     }
 
-    if (idComentarioEditando) {
-        return salvarEdicao(idComentarioEditando, titulo, conteudo);
-    }
-
     fetch(`/comentarios/publicar/${idUsuario}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -152,4 +148,9 @@ function escapeHtml(texto) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+
+function Arquivar() {
+
+
 }
