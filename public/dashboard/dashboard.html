@@ -31,7 +31,7 @@
                 <a href="../cadastro.html"> Cadastro </a>
             </li>
             <li>
-                 <span style="color: rgb(230, 2, 127); font-weight: bold; cursor: default;"> Perfil </span>
+                <span style="color: rgb(230, 2, 127); font-weight: bold; cursor: default;"> Perfil </span>
             </li>
         </ul>
 
@@ -39,7 +39,45 @@
 
     <div class="classe_padronizacao">
 
-      
+        <h1 class="artigo_titulo"> Estatísticas <span style="color: rgb(230, 2, 127);"> USUÁRIO </span></h1>
+
+        <div class="dashboard">
+
+            
+            <div class="dashboard_kpi">
+            <h4> Artigos Arquivados </h4>
+            <span> 2 </span>
+            </div>
+            <div class="dashboard_kpi">
+            <h4> Artigos por Categoria </h4>
+            <span> 2 <span style="color: white;"> Tecnologia </span></span>
+            <span> 1 <span style="color: white;"> Game Design </span></span>
+            </div>
+            <div class="dashboard_kpi">
+            <h4> Idade da Conta </h4>
+            <span> 15 <span style="color: white;"> dias </span> </span>
+            </div>
+            <div class="dashboard_kpi">
+            <h4> Comentários </h4>
+            <span> 2 </span>
+            </div>
+
+        </div>
+    
+        <div class="dashboard">
+
+            <div class="dashboard_kpi">
+                <span style="color: white;"> Artigos Totais / <span> Arquivados </span></span>
+                <br>
+                <canvas id="chartFixo" class="dashboard_graficos"></canvas>
+            </div>
+             <div class="dashboard_kpi">
+                <span style="color: white;"> Comentários por Categoria </span>
+                <canvas id="" class="dashboard_graficos"></canvas>
+            </div>
+            
+        </div>
+
     </div>
 
     <div class="footer">
@@ -49,3 +87,45 @@
 </body>
 
 </html>
+
+<script>
+
+    Chart.defaults.color = 'white';
+    Chart.defaults.borderColor = 'white'
+
+    const ctx = document.getElementById('chartFixo');
+
+    new Chart(ctx,
+        {
+            type:'bar',
+            data: {
+                labels: ['Tecnologia', 'Game Design'],
+                    datasets: [{    
+                    label: 'Total',
+                    data: [3, 1],
+                    backgroundColor: 'white',
+                    borderColor: 'white'
+                
+                },
+                   {
+                    labels: ['Tecnologia', 'Game Design'],
+                    label: 'Arquivados',
+                    data: [1, 1],
+                    backgroundColor: 'rgb(230, 2, 127)',
+                    borderColor: 'rgb(230, 2, 127)'
+                }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                    ticks: {
+                        stepSize: 1,
+                        }
+                    }
+                }
+            }
+        }
+    )
+
+</script>

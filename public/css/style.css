@@ -324,3 +324,39 @@ button {
     color: white;
     border-color: rgb(230, 2, 127);
 }
+
+.dashboard {
+
+    display: flex;
+    flex-direction: row;
+}
+
+.dashboard_kpi {
+
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: rgb(8, 0, 80);
+    justify-content: center;
+    text-justify: center;
+    font-size: 20px;
+    color: white;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    border-color: rgb(230, 2, 127);
+    border-style:double;
+}
+
+.dashboard_kpi span {
+
+    text-align: center;
+    font-weight: bolder;
+    font-size: 30px;
+    color: rgb(230, 2, 127);
+}
+
+.dashboard_graficos {
+    display: flex;
+    width: 300px;
+    height: 300px;
+}

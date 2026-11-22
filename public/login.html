@@ -40,7 +40,7 @@
         
         <span style="font-size: 30px; padding: 10px; color: rgb(230, 2, 127);"> < <span style="color:white"> Login </span> > </span>
         <br>
-        <span> E-mail : </span>
+        <span> Usuário : </span>
         <input type="text" id="inp_usuario">
         <div id="div_erro_usuario" class="texto_erro"></div>
         <br>
@@ -67,8 +67,8 @@
         var usuario = inp_usuario.value;
         var senha = inp_senha.value;
 
-        div_erro_senha = ``
-        div_erro_usuario = ``
+        div_erro_senha.innerHTML = ``
+        div_erro_usuario.innerHTML = ``
 
         if (usuario == "") {
             div_erro_usuario.innerHTML = `INSIRA UM USUÁRIO`
@@ -108,7 +108,7 @@
             } else {
 
                 console.log("Houve um erro ao tentar realizar o login!");
-
+                usuario == '' && senha == '' ? div_erro_senha.innerHTML = null : div_erro_senha.innerHTML = `USUÁRIO OU SENHA INCORRETOS.`
             }
 
         }).catch(function (erro) {
