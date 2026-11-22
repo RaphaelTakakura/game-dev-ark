@@ -18,7 +18,6 @@ var app = express();
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var comentarioRouter = require("./src/routes/comentarios");
-var dashRouter = require("./src/routes/dashboard");
 var arquivamentosRouter = require("./src/routes/arquivamentos");
 //var avisosRouter = require("./src/routes/avisos");
 //var medidasRouter = require("./src/routes/medidas");
