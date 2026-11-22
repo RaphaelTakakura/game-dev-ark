@@ -12,11 +12,9 @@ function publicarComentario(event) {
     const idUsuario = sessionStorage.ID_USUARIO; 
     const titulo = document.getElementById("titulo").value.trim();
     const conteudo = document.getElementById("textarea_descricao").value.trim();
-
     const feedback = document.getElementById("feedback_comentario");
     feedback.innerHTML = "";
 
-    
     if (!idUsuario) {
         feedback.innerHTML = "Faça login para comentar.";
         return false;

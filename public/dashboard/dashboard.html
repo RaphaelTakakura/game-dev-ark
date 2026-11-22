@@ -47,7 +47,7 @@
             
             <div class="dashboard_kpi">
             <h4> Artigos Arquivados </h4>
-            <span> 2 </span>
+            <span id="kpiArquivados"> 0 </span>
             </div>
             <div class="dashboard_kpi">
             <h4> Artigos <span>Arquivados</span> por Categoria </h4>
@@ -56,11 +56,11 @@
             </div>
             <div class="dashboard_kpi">
             <h4> Idade da Conta </h4>
-            <span> 15 <span style="color: white;"> dias </span> </span>
+            <span id="kpiDiasConta"> 0 <span style="color: white;"> dias </span> </span>
             </div>
             <div class="dashboard_kpi">
             <h4> Comentários </h4>
-            <span> 2 </span>
+            <span id="kpiComentarios"> 0 </span>
             </div>
 
         </div>
@@ -94,9 +94,35 @@
     let usuario = sessionStorage.USER_USUARIO
     dash_usuario.innerHTML = `${usuario}`
 
+    function carregarDashboard() {
+    const idUsuario = sessionStorage.ID_USUARIO;
+    if (!idUsuario) {
+        window.location = "../login.html";
+        return;
+    }
+
+    fetch(`/dashboard/pegarDados/${idUsuario}`)
+    .then(function (res) {
+        if (res.status === 204) return null;
+        if (!res.ok) return res.text().then(t => { throw new Error(t); });
+        return res.json();
+    })
+    .then(function (dados) {
+        if (!dados) return;
+        kpiArquivados.innerText = dados.artigos_arquivados ?? 0;
+        kpiDiasConta.innerHTML = `${dados.data_conta ?? 0} <span style="color: white;">dias</span>`;
+        kpiComentarios.innerText = dados.comentarios ?? 0;
+    })
+    .catch(function (erro) {
+        console.error("Erro dashboard:", erro.message || erro);
+    });
+}
+
+    window.onload = carregarDashboard;
+
     Chart.defaults.color = 'white';
     Chart.defaults.borderColor = 'white'
-
+    
     const ctx = document.getElementById('chartFixo');
 
     new Chart(ctx,

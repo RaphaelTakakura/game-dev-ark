@@ -25,8 +25,6 @@ function autenticar(req, res) {
                             usuario: resultadoAutenticar[0].usuario
                         })
 
-                        return res.status(200).json(resultadoAutenticar[0]);
-
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Usuário e/ou senha inválido(s)");
                     } else {
