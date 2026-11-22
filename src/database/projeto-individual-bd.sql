@@ -56,3 +56,7 @@ SELECT * FROM artigo_arquivado;
 
 INSERT INTO comentario VALUES
 (1, 'Comentário Teste', NOW(), 'Esse comentário é um teste de conexão.', 1,1);
+
+-- Comandos para pegar os dados da dashboard
+
+SELECT COUNT(aa.fk_artigos) FROM artigo_arquivado aa JOIN usuario u ON aa.fk_usuario = u.id

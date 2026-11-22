@@ -1,20 +1,10 @@
 const body = document.body;
 
-if (!body || !body.dataset || !body.dataset.artigoId) {
-  console.warn("Página sem data-artigo-id. Script de comentários ignorado.");
-} else {
-  const ID_ARTIGO = Number(body.dataset.artigoId);
-}
-
 const ID_ARTIGO = Number(document.body.dataset.artigoId);
-
-let idComentarioEditando = null;
 
 window.onload = function () {
   listarComentarios();
 };
-
-
 
 function publicarComentario(event) {
     event.preventDefault(); 
@@ -120,10 +110,6 @@ function deletarComentario(idComentario) {
         })
         .then(function () {
         document.getElementById("feedback_comentario").innerHTML = "Comentário deletado.";
-        if (idComentarioEditando === idComentario) {
-            idComentarioEditando = null;
-            limparFormulario();
-        }
         listarComentarios();
         })
         .catch(function (erro) {

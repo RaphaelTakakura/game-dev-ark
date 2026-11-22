@@ -40,25 +40,6 @@ function listarPorArtigo(req, res) {
         });
 }
 
-function editar(req, res) {
-    var idComentario = req.params.idComentario;
-    var conteudo = req.body.conteudo;
-    var titulo = req.body.titulo;
-
-    if (!idComentario) return res.status(400).send("idComentario undefined!");
-    if (!conteudo) return res.status(400).send("Conteúdo undefined!");
-    if (!titulo) return res.status(400).send("Título undefined!");
-
-    comentarioModel.editar(idComentario, titulo, conteudo)
-        .then(function (resultado) {
-            return res.status(200).json(resultado);
-        })
-        .catch(function (erro) {
-            console.log(erro);
-            return res.status(500).json(erro.sqlMessage || erro);
-        });
-}
-
 function deletar(req, res) {
     var idComentario = req.params.idComentario;
 
@@ -77,6 +58,5 @@ function deletar(req, res) {
 module.exports = {
     publicar,
     listarPorArtigo,
-    editar,
     deletar
 };
