@@ -59,9 +59,41 @@ INSERT INTO comentario VALUES
 
 -- Comandos para pegar os dados da dashboard
 
+-- KPIs 1, 3 e 4
 SELECT
 IFNULL(COUNT(DISTINCT aa.fk_artigo),0) AS 'artigos_arquivados',
 DATEDIFF(CURRENT_TIMESTAMP, dt_cadastro) AS 'data_conta',
 IFNULL(COUNT(DISTINCT c.id),0) AS 'comentarios'
 FROM usuario u LEFT JOIN artigo_arquivado aa ON aa.fk_usuario = u.id  LEFT JOIN comentario c ON c.fk_usuario = u.id
 WHERE u.id = 1 GROUP BY u.id;
+
+-- KPI 2 e gráfico 1
+
+SELECT
+i.id AS id_interesse,
+i.nome AS interesse,
+COUNT(DISTINCT a.id) AS total_artigos,
+COUNT(DISTINCT aa.fk_artigo) AS artigos_arquivados
+FROM interesse i
+LEFT JOIN artigo a
+ON a.fk_interesse = i.id
+LEFT JOIN artigo_arquivado aa
+ON aa.fk_artigo = a.id
+AND aa.fk_usuario = 1
+GROUP BY i.id, i.nome
+ORDER BY i.id;
+
+-- Gráfico 2
+
+SELECT
+i.id AS id_interesse,
+i.nome AS interesse,
+COUNT(c.id) AS qtd_comentarios
+FROM interesse i
+LEFT JOIN artigo a
+ON a.fk_interesse = i.id
+LEFT JOIN comentario c
+ON c.fk_artigo = a.id
+AND c.fk_usuario = 1
+GROUP BY i.id, i.nome
+ORDER BY i.id;

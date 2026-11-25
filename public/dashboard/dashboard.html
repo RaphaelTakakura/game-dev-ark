@@ -51,16 +51,16 @@
             </div>
             <div class="dashboard_kpi">
             <h4> Artigos <span>Arquivados</span> por Categoria </h4>
-            <span> 2 <span style="color: white;"> Tecnologia </span></span>
-            <span> 1 <span style="color: white;"> Game Design </span></span>
-            </div>
-            <div class="dashboard_kpi">
-            <h4> Idade da Conta </h4>
-            <span id="kpiDiasConta"> 0 <span style="color: white;"> dias </span> </span>
+            <span id="kpi1"> 0 <span style="color: white;"> Tecnologia </span></span>
+            <span id="kpi2"> 0 </span>
             </div>
             <div class="dashboard_kpi">
             <h4> Comentários </h4>
             <span id="kpiComentarios"> 0 </span>
+            </div>
+            <div class="dashboard_kpi">
+            <h4> Idade da Conta </h4>
+            <span id="kpiDiasConta"> 0 <span style="color: white;"> dias </span> </span>
             </div>
 
         </div>
@@ -74,7 +74,9 @@
             </div>
              <div class="dashboard_kpi">
                 <span style="color: white;"> Comentários por Categoria </span>
-                <canvas id="" class="dashboard_graficos"></canvas>
+                <canvas id="chartMedia" class="dashboard_graficos"></canvas>
+                <span id="div_pctgGd"></span>
+                <span id="div_pctgTec"></span>
             </div>
             
         </div>
@@ -91,76 +93,158 @@
 
 <script>
 
-    let usuario = sessionStorage.USER_USUARIO
-    dash_usuario.innerHTML = `${usuario}`
+let chartBar;
+let chartPie;
 
-    function carregarDashboard() {
-    const idUsuario = sessionStorage.ID_USUARIO;
-    if (!idUsuario) {
-        window.location = "../login.html";
-        return;
+function criarGraficosIniciais() {
+  const ctxBar = document.getElementById("chartFixo");
+  const ctxPie = document.getElementById("chartMedia");
+
+  Chart.defaults.color = "white";
+  Chart.defaults.borderColor = "white";
+
+  chartBar = new Chart(ctxBar, {
+    type: "bar",
+    data: {
+      labels: ["Tecnologia", "Game Design"],
+      datasets: [
+        {
+          label: "Total",
+          data: [0, 0],
+          backgroundColor: "white",
+          borderColor: "white"
+        },
+        {
+          label: "Arquivados",
+          data: [0, 0],
+          backgroundColor: "rgb(230, 2, 127)",
+          borderColor: "rgb(230, 2, 127)"
+        }
+      ]
+    },
+    options: {
+      scales: { y: { ticks: { stepSize: 1 } } }
     }
+  });
 
-    fetch(`/dashboard/pegarDados/${idUsuario}`)
+  chartPie = new Chart(ctxPie, {
+    type: "pie",
+    data: {
+      labels: ["Game Design", "Tecnologia"],
+      datasets: [{
+        data: [0, 0],
+        backgroundColor: ["rgb(230, 2, 127)", "white"],
+        borderColor: "rgb(8, 0, 80)",
+        borderWidth: 2
+      }]
+    }
+  });
+}
+
+function carregarDashboard() {
+  const idUsuario = sessionStorage.ID_USUARIO;
+  const usuario = sessionStorage.USER_USUARIO || "";
+
+  if (!idUsuario) {
+    window.location = "../login.html";
+    return;
+  }
+
+  document.getElementById("dash_usuario").innerText = usuario;
+
+  fetch(`/dashboard/pegarDados/${idUsuario}`)
     .then(function (res) {
-        if (res.status === 204) return null;
+      if (res.status === 204) return null;
+      if (!res.ok) return res.text().then(t => { throw new Error(t); });
+      return res.json();
+    })
+    .then(function (dados) {
+      if (!dados) return;
+      document.getElementById("kpiArquivados").innerText = Number(dados.artigos_arquivados) || 0;
+      document.getElementById("kpiDiasConta").innerHTML = `${Number(dados.data_conta) || 0} <span style="color:white;">dias</span>`;
+      document.getElementById("kpiComentarios").innerText = Number(dados.comentarios) || 0;
+    })
+    .catch(function (erro) {
+      console.error("Erro pegarDados:", erro.message || erro);
+    });
+
+  fetch(`/dashboard/pegarDados2/${idUsuario}`)
+    .then(function (res) {
+      if (res.status === 204) return [];
+      if (!res.ok) return res.text().then(t => { throw new Error(t); });
+      return res.json();
+    })
+    .then(function (lista) {
+      let arqTec = 0, arqGd = 0;
+      let totalTec = 0, totalGd = 0;
+
+      (lista || []).forEach(function (item) {
+        const nome = String(item.interesse || "").toLowerCase();
+        const arq = Number(item.artigos_arquivados) || 0;
+        const total = Number(item.total_artigos) || 0;
+
+        if (nome.includes("tecnologia")) {
+          arqTec = arq;
+          totalTec = total;
+        } else if (nome.includes("game")) {
+          arqGd = arq;
+          totalGd = total;
+        }
+      });
+
+        fetch(`/dashboard/pegarDados3/${idUsuario}`)
+    .then(function (res) {
+        if (res.status === 204) return [];
         if (!res.ok) return res.text().then(t => { throw new Error(t); });
         return res.json();
     })
-    .then(function (dados) {
-        if (!dados) return;
-        kpiArquivados.innerText = dados.artigos_arquivados ?? 0;
-        kpiDiasConta.innerHTML = `${dados.data_conta ?? 0} <span style="color: white;">dias</span>`;
-        kpiComentarios.innerText = dados.comentarios ?? 0;
+    .then(function (lista) {
+        let comTec = 0, comGd = 0;
+
+        (lista || []).forEach(function (item) {
+        const nome = String(item.interesse || "").toLowerCase();
+        const qtd = Number(item.qtd_comentarios) || 0;
+
+        if (nome.includes("tecnologia")) comTec = qtd;
+        else if (nome.includes("game")) comGd = qtd;
+        });
+
+        
+
+        chartPie.data.datasets[0].data = [comGd, comTec];
+        chartPie.update();
+        
+        let total = comGd + comTec
+        let pctgGd = comGd / total * 100
+        let pctgTec = comTec / total * 100
+
+        div_pctgGd.innerHTML = `${Math.round(pctgGd)}<span style="color: white;">% Game Design </span>`
+        div_pctgTec.innerHTML = `${Math.round(pctgTec)}<span style="color: white;">% Tecnologia </span>`
     })
     .catch(function (erro) {
-        console.error("Erro dashboard:", erro.message || erro);
+        console.error("Erro pegarDados3:", erro.message || erro);
+    });
+
+      document.getElementById("kpi1").innerHTML = `${arqTec} <span style="color:white;">Tecnologia</span>`;
+      document.getElementById("kpi2").innerHTML = `${arqGd} <span style="color:white;">Game Design</span>`;
+
+      chartBar.data.datasets[0].data = [totalTec, totalGd];
+      chartBar.data.datasets[1].data = [arqTec, arqGd];
+      chartBar.update();
+      chartPie.data.datasets[0].data = [arqGd, arqTec];
+      chartPie.update();
+    })
+    .catch(function (erro) {
+      console.error("Erro pegarDados2:", erro.message || erro);
     });
 }
 
-    window.onload = carregarDashboard;
+window.onload = function () {
+  criarGraficosIniciais();
+  carregarDashboard();
+};
 
-    Chart.defaults.color = 'white';
-    Chart.defaults.borderColor = 'white'
-    
-    const ctx = document.getElementById('chartFixo');
-
-    new Chart(ctx,
-        {
-            type:'bar',
-            data: {
-                labels: ['Tecnologia', 'Game Design'],
-                    datasets: [{    
-                    label: 'Total',
-                    data: [3, 1],
-                    backgroundColor: 'white',
-                    borderColor: 'white'
-                
-                },
-                   {
-                    labels: ['Tecnologia', 'Game Design'],
-                    label: 'Arquivados',
-                    data: [1, 1],
-                    backgroundColor: 'rgb(230, 2, 127)',
-                    borderColor: 'rgb(230, 2, 127)'
-                }
-                ]
-            },
-            options: {
-                scales: {
-                    y: {
-                    ticks: {
-                        stepSize: 1,
-                        }
-                    }
-                }
-            }
-        }
-    )
-
-    function Sair() {
-
-        sessionStorage.clear()
-    }
-
+function Sair() {
+  sessionStorage.clear();
+}
 </script>
