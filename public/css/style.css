@@ -258,7 +258,7 @@ button {
 .classe_padronizacao_links {
 
     text-decoration: none;
-    color: rgb(230, 2, 127);   
+    color: #e6027f;   
     font-weight: bold;
 }
 
@@ -269,7 +269,7 @@ button {
     justify-self: center;
     justify-content: center;
     align-items: center;
-    background-color: rgb(8, 0, 80);
+    background-color: #080050;
     width: 95%;
     height: fit-content;
     padding: 20px;

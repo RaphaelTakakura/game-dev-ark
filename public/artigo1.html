@@ -13,6 +13,7 @@
 
     <script src="js/script_comentarios.js" defer></script>
     <script src="js/script_arquivar.js" defer></script>
+    <script src="js/script_geral.js" async></script>
 
 </head>
 
@@ -114,22 +115,4 @@
     
 </body>
 
-<script>
-
-    if (!sessionStorage.USER_USUARIO) {
-        login_perfil.innerHTML = `<a href="cadastro.html"> Cadastro </a>`;
-        login_deslogar.innerHTML = `<a href="login.html"> Login </a>`
-    }
-
-    else {
-
-        login_perfil.innerHTML = `<a href="dashboard/dashboard.html"> Perfil </a>`;
-        login_deslogar.innerHTML = `<a href="login.html" onclick="Sair()"> Sair </a>`
-    }
-
-    function Sair() {
-
-        sessionStorage.clear()
-    }
-
-</script>
+</html>

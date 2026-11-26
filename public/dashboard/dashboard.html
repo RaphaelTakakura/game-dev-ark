@@ -64,7 +64,7 @@
             </div>
 
         </div>
-    
+
         <div class="dashboard">
 
             <div class="dashboard_kpi">
@@ -75,8 +75,8 @@
              <div class="dashboard_kpi">
                 <span style="color: white;"> Comentários por Categoria </span>
                 <canvas id="chartMedia" class="dashboard_graficos"></canvas>
-                <span id="div_pctgGd"></span>
-                <span id="div_pctgTec"></span>
+                <span id="div_pctgTec" style="color: rgb(0, 153, 255);"></span>
+                <span id="div_pctgGd" style="color: rgb(255, 0, 106)"></span>
             </div>
             
         </div>
@@ -111,13 +111,13 @@ function criarGraficosIniciais() {
         {
           label: "Total",
           data: [0, 0],
-          backgroundColor: "white",
+          backgroundColor: ["white"],
           borderColor: "white"
         },
         {
           label: "Arquivados",
           data: [0, 0],
-          backgroundColor: "rgb(230, 2, 127)",
+          backgroundColor: ["rgb(0, 153, 255)", "rgb(255, 0, 106)"],
           borderColor: "rgb(230, 2, 127)"
         }
       ]
@@ -130,11 +130,11 @@ function criarGraficosIniciais() {
   chartPie = new Chart(ctxPie, {
     type: "pie",
     data: {
-      labels: ["Game Design", "Tecnologia"],
+      labels: ["Tecnologia", "Game Design"],
       datasets: [{
         data: [0, 0],
-        backgroundColor: ["rgb(230, 2, 127)", "white"],
-        borderColor: "rgb(8, 0, 80)",
+        backgroundColor: ["rgb(0, 153, 255)", "rgb(255, 0, 106)"],
+        borderColor: "white",
         borderWidth: 2
       }]
     }
@@ -209,9 +209,7 @@ function carregarDashboard() {
         else if (nome.includes("game")) comGd = qtd;
         });
 
-        
-
-        chartPie.data.datasets[0].data = [comGd, comTec];
+        chartPie.data.datasets[0].data = [comTec, comGd];
         chartPie.update();
         
         let total = comGd + comTec
